@@ -1,0 +1,23 @@
+Group,Indicator,Unit,Source,Mount Sharp / Gale (Mars),#1 30.0°N 85.0°E,#2 55.0°N 65.0°W,#3 70.0°N 80.0°E,#4 75.0°S 20.0°E,#5 70.0°S 50.0°E,#6 70.0°S 130.0°E,#7 70.0°S 105.0°E,#8 75.0°N 40.0°W
+Site,Region,,Climate search,,Elsewhere,Elsewhere,Elsewhere,Antarctica,Antarctica,Antarctica,Antarctica,Elsewhere
+Site,Best month,,"NASA POWER (MERRA-2), modelled",Ls 135-178,JAN,JAN,MAR,OCT,OCT,OCT,OCT,APR
+Site,Climate cell elevation,m,"NASA POWER (MERRA-2), modelled",,5421,509,36,3515,2347,2537,2535,2886
+Match scores,Climate match,0-1,"NASA POWER (MERRA-2), modelled",,0.37,0.45,0.45,0.56,0.64,0.68,0.78,0.43
+Match scores,Terrain match,0-1,"ASTER GDEM v3 (NASA/METI), 200 m",,0.65,0.23,0.11,0.87,0.64,0.39,0.26,0.45
+Match scores,Combined match,0-1,Mean of climate and terrain,,0.51,0.34,0.28,0.71,0.64,0.54,0.52,0.44
+Climate,Night minimum air temperature,deg C,"NASA POWER (MERRA-2), modelled",-76.5,-38.0,-49.9,-55.7,-63.8,-52.9,-56.7,-64.6,-54.1
+Climate,Day-night temperature range,K,"NASA POWER (MERRA-2), modelled",66.6,14.1,9.8,8.4,8.2,8.8,8.5,8.7,8.1
+Climate,"Mean wind speed, 2 m",m/s,"NASA POWER (MERRA-2), modelled",11.1,4.8,5.0,4.3,4.6,8.1,8.0,9.2,4.4
+Climate,Wind night/day ratio,,"NASA POWER (MERRA-2), modelled, hourly",2.0,0.46,0.93,0.87,0.88,0.96,0.94,0.95,0.86
+Climate,Dust optical depth,,"MERRA-2, GES DISC, modelled",0.49,0.003,0.004,0.015,0.003,0.003,0.003,0.004,0.016
+Climate,Air density compared with Mars,x Mars,"NASA POWER (MERRA-2), modelled",1.0,43,81,84,59,65,65,66,61
+Best terrain window,Window centre latitude,deg,"ASTER GDEM v3 (NASA/METI), 200 m",,29.46,55.54,70.54,-74.46,-70.36,-70.18,-69.46,75.36
+Best terrain window,Window centre longitude,deg,"ASTER GDEM v3 (NASA/METI), 200 m",,84.38,-65.31,79.47,22.09,51.57,128.43,104.47,-40.69
+Best terrain window,Distance from climate site,km,"ASTER GDEM v3 (NASA/METI), 200 m",,85,63,63,85,72,63,63,45
+Best terrain window,Elevation range,m,"ASTER GDEM v3 (NASA/METI), 200 m",5443,2106,307,109,4617,1461,1537,646,3274
+Best terrain window,Mean slope,deg,"ASTER GDEM v3 (NASA/METI), 200 m",7.2,9.9,2.8,1.6,8.3,6.9,3.6,3.0,24.3
+Best terrain window,"Roughness, 1 km window",m,"ASTER GDEM v3 (NASA/METI), 200 m",35.8,43.6,12.2,6.2,48.1,33.7,17.7,13.4,126.9
+Best terrain window,"Roughness, 5 km window",m,"ASTER GDEM v3 (NASA/METI), 200 m",161.6,125.0,29.0,10.3,160.6,86.6,55.5,26.6,291.4
+Elevation check,"Lowest point, 1 km grid",m,"ASTER GDEM v3 (NASA/METI), 1 km",,3439,301,3,612,1226,624,2080,1172
+Elevation check,"Highest point, 1 km grid",m,"ASTER GDEM v3 (NASA/METI), 1 km",,6139,646,132,6915,2831,2768,3169,5138
+Elevation check,Terrain data reliability,,Comparison with known elevations,,"Checked, plausible","Checked, plausible","Checked, plausible",Unverified (ASTER unreliable over ice),Unverified (ASTER unreliable over ice),Unverified (ASTER unreliable over ice),Unverified (ASTER unreliable over ice),Unverified (ASTER unreliable over ice)

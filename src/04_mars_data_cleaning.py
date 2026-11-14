@@ -77,9 +77,6 @@ for col, group, label, unit, dec, mult in TERRAIN_SPEC:
 terrain_clean_df = pd.DataFrame(rows)
 
 # Summarise + save
-print(mars_clean_df.to_string(index=False))
-print()
-print(terrain_clean_df.to_string(index=False))
 mars_clean_df.to_csv(OUT_DIR / 'gale_late_winter_final.csv', index=False)
 terrain_clean_df.to_csv(OUT_DIR / 'mount_sharp_terrain_final.csv', index=False)
 print('Clean tables saved')

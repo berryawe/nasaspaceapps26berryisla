@@ -10,13 +10,14 @@ A_FILE = CLEAN_DIR / 'earth_matches_method_a_final.csv'     # Method A: climate 
 B_FILE = CLEAN_DIR / 'earth_matches_method_b_final.csv'     # Method B: terrain first, then climate
 OUT_FILE = CLEAN_DIR / 'earth_matches_combined.csv'         # every candidate from both methods, scored on the same rules
 TOP_FILE = CLEAN_DIR / 'earth_top3_vs_mars.csv'             # the top matches against Gale, indicator by indicator
+REMA_FILE = BASE_DIR / 'data' / 'raw' / 'rema_check.csv'    # ASTER checked against REMA at the Antarctic windows
 TOP_N = 3                                                   # how many best matches to report
 
 # Our priorities, applied the same way to both methods
 CLIMATE_WEIGHT = 0.6             # 1. weather first: this is a weather-based analogue for drone testing (terrain gets the other 40%)
 MAX_NIGHT_MIN_C = -35.0          # 2. a site must pass the Method A gates: nights cold enough...
 MIN_RANGE_K = 8.0                #    ...and a real day-night cycle (polar night has none)
-                                 # 3. only terrain that passed the elevation check can win (ASTER is unreliable over ice)
+                                 # 3. only terrain that passed the elevation check can win (ASTER is unreliable over ice; REMA settles the Antarctic sites)
                                  # 4. air density is a gap and a tie-breaker, not part of the score (Earth is always far denser)
 SAME_REGION_KM = 200.0           # best windows closer than this count as the same region when comparing methods
 NEAR_TIE = 0.01                  # combined scores closer than this are reported as a tie
@@ -79,11 +80,34 @@ all_df['PLACE'] = [A_NAMES.get(s, s) if m == 'A' else s for m, s in zip(all_df['
 all_df['PLACE_FULL'] = [f'{A_NAMES[s]} ({s})' if m == 'A' and s in A_NAMES else s for m, s in zip(all_df['METHOD'], all_df['SITE'])]
 all_df = all_df[['METHOD', 'SITE', 'PLACE', 'PLACE_FULL', 'BEST_MONTH'] + NUMBER_COLS + ['TERRAIN_DATA']]
 
+# ---------------------------------------------------------------- REMA verdicts replace the ASTER 'Unverified' flag
+def rema_site(label):
+    """Turn a REMA check label back into the SITE name used in the tidy tables."""
+    if label.startswith('B '):
+        return label[2:]
+    lat, lon = (float(x) for x in label[2:].split(','))
+    return f'{abs(lat):.1f}°{"S" if lat < 0 else "N"} {abs(lon):.1f}°{"W" if lon < 0 else "E"}'
+
+
+rema_verdict = {}
+if REMA_FILE.exists():
+    rema = pd.read_csv(REMA_FILE)
+    for label, verdict in zip(rema['LABEL'], rema['VERDICT']):
+        site = rema_site(label)
+        if site not in set(all_df['SITE']):
+            print(f'Warning: REMA window "{label}" matches no site in the tables')
+        elif verdict.startswith('ASTER agrees'):
+            rema_verdict[site] = 'Verified (REMA agrees with ASTER)'
+        elif verdict.startswith('ASTER disagrees'):
+            rema_verdict[site] = 'Disproved (REMA: flat ice sheet)'
+all_df['TERRAIN_DATA'] = [rema_verdict.get(s, t) for s, t in zip(all_df['SITE'], all_df['TERRAIN_DATA'])]
+
 # ---------------------------------------------------------------- Same rules for every candidate
 all_df['GATES_OK'] = (all_df['T2M_MIN_C'] <= MAX_NIGHT_MIN_C) & (all_df['T2M_RANGE_K'] >= MIN_RANGE_K)
-all_df['TERRAIN_OK'] = ~all_df['TERRAIN_DATA'].str.startswith('Unverified')
+all_df['TERRAIN_OK'] = ~all_df['TERRAIN_DATA'].str.startswith(('Unverified', 'Disproved'))
 all_df['STATUS'] = np.where(~all_df['GATES_OK'], 'Fails climate gates',
-                            np.where(~all_df['TERRAIN_OK'], 'Provisional (terrain unverified)', 'Eligible'))
+                            np.where(all_df['TERRAIN_DATA'].str.startswith('Disproved'), 'Terrain disproved (REMA)',
+                                     np.where(~all_df['TERRAIN_OK'], 'Provisional (terrain unverified)', 'Eligible')))
 reasons = []
 for r in all_df.itertuples():
     why = []
@@ -91,7 +115,9 @@ for r in all_df.itertuples():
         why.append(f'nights only {r.T2M_MIN_C:.0f} C')
     if r.T2M_RANGE_K < MIN_RANGE_K:
         why.append(f'day-night range {r.T2M_RANGE_K:.1f} K')
-    if not r.TERRAIN_OK:
+    if r.TERRAIN_DATA.startswith('Disproved'):
+        why.append('REMA shows a flat ice sheet')
+    elif not r.TERRAIN_OK:
         why.append('terrain unverified')
     reasons.append(', '.join(why))
 all_df['WHY'] = reasons
@@ -127,8 +153,11 @@ heading('OTHER ELIGIBLE SITES')
 rest = all_df[eligible].iloc[TOP_N:]
 table(rest, ['RANK', 'METHOD', 'PLACE', 'COMBINED_SCORE', 'CLIMATE_SCORE', 'TERRAIN_SCORE']) if len(rest) else print('none')
 
-heading('NOT RANKED: PASS THE CLIMATE GATES BUT TERRAIN IS UNVERIFIED (could not win yet)')
+heading('NOT RANKED: PASS THE CLIMATE GATES BUT TERRAIN IS STILL UNVERIFIED (could not win yet)')
 table(all_df[all_df['STATUS'] == 'Provisional (terrain unverified)'], ['METHOD', 'PLACE', 'COMBINED_SCORE', 'CLIMATE_SCORE', 'TERRAIN_SCORE', 'WHY'])
+
+heading('NOT RANKED: PASS THE CLIMATE GATES BUT REMA SHOWS THE TERRAIN IS FLAT')
+table(all_df[all_df['STATUS'] == 'Terrain disproved (REMA)'], ['METHOD', 'PLACE', 'COMBINED_SCORE', 'CLIMATE_SCORE', 'TERRAIN_SCORE', 'WHY'])
 
 heading('NOT RANKED: FAIL THE CLIMATE GATES')
 table(all_df[all_df['STATUS'] == 'Fails climate gates'], ['METHOD', 'PLACE', 'COMBINED_SCORE', 'CLIMATE_SCORE', 'TERRAIN_SCORE', 'WHY'])

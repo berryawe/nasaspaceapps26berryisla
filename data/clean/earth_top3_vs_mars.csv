@@ -1,0 +1,19 @@
+Group,Indicator,Unit,Gale / Mount Sharp (Mars),#1 Tibetan plateau (30.0°N 85.0°E),#2 Labrador-Quebec (55.0°N 65.0°W),#3 Pamirs
+Match,Method,,,A,A,B
+Match,Combined score,0-1,,0.48,0.36,0.36
+Match,Climate match,0-1,,0.37,0.45,0.24
+Match,Terrain match,0-1,,0.65,0.23,0.54
+Climate,Best month,,Ls 135-178,JAN,JAN,FEB
+Climate,Night minimum air temperature,deg C,-76.5,-38.0,-49.9,-36.6
+Climate,Day-night temperature range,K,66.6,14.1,9.8,12.9
+Climate,"Mean wind speed, 2 m",m/s,11.1,4.8,5.0,3.2
+Climate,Wind night/day ratio,,2.0,0.46,0.93,0.51
+Climate,Dust optical depth,,0.49,0.003,0.004,
+Climate,Air density compared with Mars,x Mars,1.0,43,81,49
+Terrain,Elevation range,m,5443,2106,307,2210
+Terrain,Mean slope,deg,7.2,9.9,2.8,15.3
+Terrain,"Roughness, 1 km window",m,35.8,43.6,12.2,71.3
+Terrain,"Roughness, 5 km window",m,161.6,125.0,29.0,198.8
+Location,Best window latitude,deg,,29.46,55.54,39.04
+Location,Best window longitude,deg,,84.38,-65.31,73.69
+Check,Terrain data reliability,,,"Checked, plausible","Checked, plausible","Checked, plausible"

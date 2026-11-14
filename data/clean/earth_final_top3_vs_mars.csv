@@ -1,0 +1,20 @@
+Group,Indicator,Unit,Gale / Mount Sharp (Mars),#1 Tibetan plateau (A),#2 Aksai Chin,#3 Mongolian Altai,"(analogue) Dry Valleys, Antarctica","(analogue) Tibesti Mountains, Chad","(analogue) Atacama Desert, Yungay","(analogue) Death Valley, California","(analogue) Mars Desert Research Station, Utah","(analogue) Qaidam Basin, China","(analogue) Salar de Uyuni, Bolivia","(analogue) Devon Island, Arctic Canada"
+Match,Combined score,0-1,,0.48,0.48,0.42,0.67,0.47,0.47,0.45,0.45,0.44,0.42,0.34
+Match,Climate match,0-1,,0.37,0.37,0.27,0.62,0.32,0.3,0.25,0.28,0.26,0.33,0.28
+Match,Terrain match,0-1,,0.65,0.65,0.64,0.76,0.69,0.71,0.76,0.69,0.71,0.57,0.43
+Match,Status,,,Eligible,Eligible,Eligible,Fails climate gates,Fails climate gates,Fails climate gates,Fails climate gates,Fails climate gates,Fails climate gates,Fails climate gates,Fails climate gates
+Climate,Best month,,Ls 135-178,JAN,FEB,FEB,AUG,FEB,NOV,JUN,JUN,JUL,OCT,MAR
+Climate,Night minimum air temperature,deg C,-76.5,-38.0,-36.6,-40.8,-56.1,-1.1,0.6,9.3,-0.2,-4.0,-8.1,-50.0
+Climate,Day-night temperature range,K,66.6,14.1,13.0,12.9,5.6,18.7,18.3,17.0,17.2,14.9,20.4,6.7
+Climate,"Mean wind speed, 2 m",m/s,11.1,4.8,5.3,2.9,8.9,3.0,2.8,2.4,2.8,3.2,2.7,3.1
+Climate,Wind night/day ratio,,2.0,0.46,0.53,0.79,,,,,,,,
+Climate,Dust optical depth,,0.49,0.003,0.02,0.022,0.002,0.079,0.008,0.047,0.032,0.12,0.003,0.012
+Climate,Rain,mm/day,,,0.11,0.17,0.27,0.01,0.01,0.05,0.29,0.52,0.09,0.51
+Climate,Air density compared with Mars,x Mars,1.0,43,44,62,72,62,60,65,58,47,49,85
+Terrain,Elevation range,m,5443,2106,1416,2020,2405,1951,2806,2611,2263,2376,1454,686
+Terrain,Mean slope,deg,7.2,9.9,7.3,11.2,7.1,7.7,6.6,7.2,7.6,8.2,5.6,5.0
+Terrain,"Roughness, 1 km window",m,35.8,43.6,33.1,52.6,34.4,35.9,30.1,33.3,33.3,35.8,26.1,23.2
+Terrain,"Roughness, 5 km window",m,161.6,125.0,92.3,148.8,116.6,97.4,105.8,115.1,95.5,103.6,93.0,60.4
+Location,Best window latitude,deg,,29.46,35.32,48.32,-77.68,20.46,-24.46,36.5,37.86,37.62,-20.74,74.86
+Location,Best window longitude,deg,,84.38,79.94,90.55,160.34,17.5,-70.3,-116.77,-111.03,90.82,-68.08,-87.58
+Check,Terrain data reliability,,,"Checked, plausible","Checked, plausible","Checked, plausible",Unverified (ASTER unreliable over ice),"Checked, plausible","Checked, plausible","Checked, plausible","Checked, plausible","Checked, plausible","Checked, plausible","Checked, plausible"

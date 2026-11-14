@@ -1,0 +1,36 @@
+NIGHT_GATE_C,RANGE_GATE_K,REGIONS_PASSING,WINNER,SCORE,RUNNER_UP,MARGIN,PLATEAU_WINS
+-30,5,20,Aksai Chin,0.482,Kunlun,0.054,True
+-30,6,19,Aksai Chin,0.482,Kunlun,0.054,True
+-30,8,19,Aksai Chin,0.482,Kunlun,0.054,True
+-30,10,17,Aksai Chin,0.482,Kunlun,0.054,True
+-30,12,10,Aksai Chin,0.482,Kunlun,0.054,True
+-32,5,20,Aksai Chin,0.482,Kunlun,0.054,True
+-32,6,19,Aksai Chin,0.482,Kunlun,0.054,True
+-32,8,19,Aksai Chin,0.482,Kunlun,0.054,True
+-32,10,17,Aksai Chin,0.482,Kunlun,0.054,True
+-32,12,10,Aksai Chin,0.482,Kunlun,0.054,True
+-34,5,19,Aksai Chin,0.482,Mongolian Altai,0.063,True
+-34,6,18,Aksai Chin,0.482,Mongolian Altai,0.063,True
+-34,8,18,Aksai Chin,0.482,Mongolian Altai,0.063,True
+-34,10,16,Aksai Chin,0.482,Mongolian Altai,0.063,True
+-34,12,9,Aksai Chin,0.482,Mongolian Altai,0.063,True
+-35,5,17,Aksai Chin,0.482,Mongolian Altai,0.063,True
+-35,6,16,Aksai Chin,0.482,Mongolian Altai,0.063,True
+-35,8,16,Aksai Chin,0.482,Mongolian Altai,0.063,True
+-35,10,13,Aksai Chin,0.482,Mongolian Altai,0.063,True
+-35,12,7,Aksai Chin,0.482,Mongolian Altai,0.063,True
+-36,5,14,Aksai Chin,0.482,Mongolian Altai,0.063,True
+-36,6,13,Aksai Chin,0.482,Mongolian Altai,0.063,True
+-36,8,13,Aksai Chin,0.482,Mongolian Altai,0.063,True
+-36,10,10,Aksai Chin,0.482,Mongolian Altai,0.063,True
+-36,12,5,Aksai Chin,0.482,Mongolian Altai,0.063,True
+-38,5,11,Aksai Chin,0.468,Mongolian Altai,0.049,True
+-38,6,10,Aksai Chin,0.468,Mongolian Altai,0.049,True
+-38,8,10,Aksai Chin,0.468,Mongolian Altai,0.049,True
+-38,10,7,Aksai Chin,0.468,Mongolian Altai,0.049,True
+-38,12,2,Mongolian Altai,0.419,Ladakh,0.075,False
+-40,5,6,Aksai Chin,0.468,Mongolian Altai,0.049,True
+-40,6,6,Aksai Chin,0.468,Mongolian Altai,0.049,True
+-40,8,6,Aksai Chin,0.468,Mongolian Altai,0.049,True
+-40,10,4,Aksai Chin,0.468,Mongolian Altai,0.049,True
+-40,12,1,Mongolian Altai,0.419,,,False

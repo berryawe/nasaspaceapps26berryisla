@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- NasaDrone copy: base_link visual = full body mesh from DroneDesignBody+Sensors.step + hubs/solar (base_link_full.STL); rotor joints raised to the CAD blade planes (upper 0.3995 m, lower 0.302 m). Original note: Gale Crater methane drone, Design D. Exported from SolidWorks (sw_urdf_exporter), corrected:
+     masses set to the Design D budget (28.34 kg total: base 24.93 + 6 x 0.568 rotors), inertias recomputed,
+     Rotor1/Rotor6 joint origins restored, rotor axes set to +Z, rotor meshes regenerated, effort/velocity limits added.
+     base_link mesh is the original partial export: re-export for full visuals. -->
+<robot name="Gale_Drone">
+  <link name="base_link">
+    <inertial>
+      <origin xyz="0.000000 0.000000 0.018293" rpy="0 0 0" />
+      <mass value="24.9280" />
+      <inertia ixx="5.794874" ixy="0.000000" ixz="-0.000000" iyy="5.794874" iyz="-0.000000" izz="10.789381" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry><mesh filename="package://Gale_Drone/meshes/base_link_full.STL" /></geometry>
+      <material name=""><color rgba="0.098 0.149 0.4 1" /></material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry><mesh filename="package://Gale_Drone/meshes/base_link_full.STL" /></geometry>
+    </collision>
+  </link>
+  <link name="Rotor1">
+    <inertial>
+      <origin xyz="0.000000 0.000000 0.000878" rpy="0 0 0" />
+      <mass value="0.5680" />
+      <inertia ixx="0.037826" ixy="0.000000" ixz="0.000000" iyy="0.037826" iyz="0.000000" izz="0.075620" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry><mesh filename="package://Gale_Drone/meshes/Rotor1.STL" /></geometry>
+      <material name=""><color rgba="0.1 0.1 0.1 1" /></material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry><mesh filename="package://Gale_Drone/meshes/Rotor1.STL" /></geometry>
+    </collision>
+  </link>
+  <joint name="Joint_Rotor1" type="continuous">
+    <origin xyz="1.2 0.0 0.3995" rpy="0 0 0" />
+    <parent link="base_link" />
+    <child link="Rotor1" />
+    <axis xyz="0 0 1" />
+    <limit effort="6" velocity="310" />
+  </joint>
+  <link name="Rotor2">
+    <inertial>
+      <origin xyz="0.000000 0.000000 0.000878" rpy="0 0 0" />
+      <mass value="0.5680" />
+      <inertia ixx="0.037826" ixy="0.000000" ixz="0.000000" iyy="0.037826" iyz="0.000000" izz="0.075620" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry><mesh filename="package://Gale_Drone/meshes/Rotor2.STL" /></geometry>
+      <material name=""><color rgba="0.1 0.1 0.1 1" /></material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry><mesh filename="package://Gale_Drone/meshes/Rotor2.STL" /></geometry>
+    </collision>
+  </link>
+  <joint name="Joint_Rotor2" type="continuous">
+    <origin xyz="0.599999999999997 -1.038769515459 0.302" rpy="0 0 0" />
+    <parent link="base_link" />
+    <child link="Rotor2" />
+    <axis xyz="0 0 1" />
+    <limit effort="6" velocity="310" />
+  </joint>
+  <link name="Rotor3">
+    <inertial>
+      <origin xyz="0.000000 0.000000 0.000878" rpy="0 0 0" />
+      <mass value="0.5680" />
+      <inertia ixx="0.037826" ixy="0.000000" ixz="0.000000" iyy="0.037826" iyz="0.000000" izz="0.075620" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry><mesh filename="package://Gale_Drone/meshes/Rotor3.STL" /></geometry>
+      <material name=""><color rgba="0.1 0.1 0.1 1" /></material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry><mesh filename="package://Gale_Drone/meshes/Rotor3.STL" /></geometry>
+    </collision>
+  </link>
+  <joint name="Joint_Rotor3" type="continuous">
+    <origin xyz="-1.2 -0.000769515459001497 0.302" rpy="0 0 0" />
+    <parent link="base_link" />
+    <child link="Rotor3" />
+    <axis xyz="0 0 1" />
+    <limit effort="6" velocity="310" />
+  </joint>
+  <link name="Rotor4">
+    <inertial>
+      <origin xyz="0.000000 0.000000 0.000878" rpy="0 0 0" />
+      <mass value="0.5680" />
+      <inertia ixx="0.037826" ixy="0.000000" ixz="0.000000" iyy="0.037826" iyz="0.000000" izz="0.075620" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry><mesh filename="package://Gale_Drone/meshes/Rotor4.STL" /></geometry>
+      <material name=""><color rgba="0.1 0.1 0.1 1" /></material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry><mesh filename="package://Gale_Drone/meshes/Rotor4.STL" /></geometry>
+    </collision>
+  </link>
+  <joint name="Joint_Rotor4" type="continuous">
+    <origin xyz="0.598970335627074 1.03864007074001 0.302" rpy="0 0 0" />
+    <parent link="base_link" />
+    <child link="Rotor4" />
+    <axis xyz="0 0 1" />
+    <limit effort="6" velocity="310" />
+  </joint>
+  <link name="Rotor5">
+    <inertial>
+      <origin xyz="0.000000 0.000000 0.000878" rpy="0 0 0" />
+      <mass value="0.5680" />
+      <inertia ixx="0.037826" ixy="0.000000" ixz="0.000000" iyy="0.037826" iyz="0.000000" izz="0.075620" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry><mesh filename="package://Gale_Drone/meshes/Rotor5.STL" /></geometry>
+      <material name=""><color rgba="0.1 0.1 0.1 1" /></material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry><mesh filename="package://Gale_Drone/meshes/Rotor5.STL" /></geometry>
+    </collision>
+  </link>
+  <joint name="Joint_Rotor5" type="continuous">
+    <origin xyz="-0.600000000000003 1.039230484541 0.3995" rpy="0 0 0" />
+    <parent link="base_link" />
+    <child link="Rotor5" />
+    <axis xyz="0 0 1" />
+    <limit effort="6" velocity="310" />
+  </joint>
+  <link name="Rotor6">
+    <inertial>
+      <origin xyz="0.000000 0.000000 0.000878" rpy="0 0 0" />
+      <mass value="0.5680" />
+      <inertia ixx="0.037826" ixy="0.000000" ixz="0.000000" iyy="0.037826" iyz="0.000000" izz="0.075620" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry><mesh filename="package://Gale_Drone/meshes/Rotor6.STL" /></geometry>
+      <material name=""><color rgba="0.1 0.1 0.1 1" /></material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry><mesh filename="package://Gale_Drone/meshes/Rotor6.STL" /></geometry>
+    </collision>
+  </link>
+  <joint name="Joint_Rotor6" type="continuous">
+    <origin xyz="-0.6 -1.03923048454 0.3995" rpy="0 0 0" />
+    <parent link="base_link" />
+    <child link="Rotor6" />
+    <axis xyz="0 0 1" />
+    <limit effort="6" velocity="310" />
+  </joint>
+</robot>

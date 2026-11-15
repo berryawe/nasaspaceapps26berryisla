@@ -16,15 +16,15 @@ DEM_URL = 'https://planetarymaps.usgs.gov/mosaic/Mars/HRSC_MOLA_Blend/Mars_HRSC_
 DEM_SOURCE = sys.argv[1] if len(sys.argv) > 1 else DEM_URL       
 AOI_NAME = sys.argv[2] if len(sys.argv) > 2 else 'mount_sharp'
 
-CENTER_LAT, CENTER_LON = -5.08, 137.85   # Mount Sharp (Aeolis Mons) summit area, degrees (east positive)
-HALF_WIDTH_KM = 40.0                     # area of interest = a square of 2 x this width
-TARGET_RES_M = 200.0                     # cell size used for slope/roughness (use ~10 for the 1 m Gale DEM)
-ROUGHNESS_WINDOWS_M = (1000, 5000)       # baselines for roughness
+CENTER_LAT, CENTER_LON = -5.08, 137.85   # Mount Sharp (Aeolis Mons) summit area, degrees (E +ve)
+HALF_WIDTH_KM = 40.0                     # area of interest
+TARGET_RES_M = 200.0                     # cell size used for slope/roughness (use ~10 for the 1m Gale DEM)
+ROUGHNESS_WINDOWS_M = (1000, 5000)       # roughness baselines
 HAZARD_SLOPES_DEG = (15, 25)             # slopes steeper than these count as hazardous 
 MARS_RADIUS_M = 3396190.0                # Mars reference sphere used by USGS map products
 MARS_GRAVITY = 3.71                      # m/s2
 R_MARS_AIR = 191.0                       # J/kg/K
-COLD_AIR_K = 200.0                       # typical air temperature used for the scale height
+COLD_AIR_K = 200.0                       # typical air temp used for the scale height
 
 OUT_DIR = BASE_DIR / 'data' / 'raw'
 OUT_DIR.mkdir(parents=True, exist_ok=True)
@@ -36,11 +36,11 @@ half_lon = half_lat / np.cos(np.radians(CENTER_LAT))
 west, east = CENTER_LON - half_lon, CENTER_LON + half_lon
 south, north = CENTER_LAT - half_lat, CENTER_LAT + half_lat
 
-# Open the DEM and read only the area of interest
+# Read only the area of interest
 path = f'/vsicurl/{DEM_SOURCE}' if DEM_SOURCE.startswith('http') else DEM_SOURCE
 with rasterio.Env(GDAL_DISABLE_READDIR_ON_OPEN='EMPTY_DIR', CPL_VSIL_CURL_ALLOWED_EXTENSIONS='.tif'):
     with rasterio.open(path) as src:
-        # The DEM may be in degrees (geographic) or metres (projected): get the native cell size in metres either way
+        # The DEM may be in degrees (geographic) or m (projected): get the native cell size in m either way
         if src.crs.is_geographic:
             native_x = abs(src.transform.a) * m_per_deg * np.cos(np.radians(CENTER_LAT))
             native_y = abs(src.transform.e) * m_per_deg

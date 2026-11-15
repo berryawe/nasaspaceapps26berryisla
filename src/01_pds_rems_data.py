@@ -10,13 +10,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Defining constants
 BASE_URL = 'https://atmos.nmsu.edu/PDS/data/mslrem_1001/DATA/'
 
-# Late southern winter (Ls 135-180) in Mars Year 38 (Earth 12/11/2024 to 30/9/2026): start, middle and end of the window
+# Late southern winter (Ls 135-180) in Mars Year 38 (Earth 12/11/2024 to 30/9/2026) - start, middle and end of the window
 TARGETS = {'begin': 4650, 'middle': 4693, 'end': 4730}
-SOL_RETRIES = 4           # if a target sol has no data, try the next few sols
+SOL_RETRIES = 4
 EXPECTED_FORMAT = 'MODRDR6.FMT'
-R_MARS_AIR = 191.0        # J/(kg K), specific gas constant of Mars air (appro.)
+R_MARS_AIR = 191.0        # J/(kg K), specific gas constant of Mars air (approx.)
 EARTH_SEA_LEVEL_DENSITY = 1.225   # kg/m3
-NIGHT_HOURS = {18, 19, 20, 21, 22, 23, 0, 1, 2, 3, 4, 5}   # local mean solar time hours counted as night (sunset ~18, sunrise ~06)
+NIGHT_HOURS = {18, 19, 20, 21, 22, 23, 0, 1, 2, 3, 4, 5}   # Local mean solar time hours counted as night (sunset: 18, sunrise: 06)
 
 RAW_DIR = BASE_DIR / 'data' / 'raw' / 'rems_modrdr'
 RAW_DIR.mkdir(parents=True, exist_ok=True)
@@ -39,9 +39,9 @@ COLUMNS = [
 ]
 
 STRING_COLS = ['LMST', 'LTST', 'PS_CONFIGURATION'] + [c for c in COLUMNS if c.endswith('CONFIDENCE_LEVEL')]
-UNKNOWN = -999.0          # the label's "unknown" constant for numeric columns
+UNKNOWN = -999.0          # "unknown" constant for numeric columns
 
-# Only these columns are loaded - all others are skipped 
+# Only load needed columns 
 USE_COLS = ['TIMESTAMP', 'LMST', 'AMBIENT_TEMP', 'AMBIENT_TEMP_CONFIDENCE_LEVEL', 'PRESSURE']
 STRING_USED = [c for c in STRING_COLS if c in USE_COLS]
 
@@ -72,16 +72,16 @@ def summarise_sol(sol, tab_path):
     hour = df['LMST'].str.extract(r'M(\d{2}):')[0].astype(float)
     amb, p = df['AMBIENT_TEMP'], df['PRESSURE']
     rho = p / (R_MARS_AIR * amb)                                   # air density, kg/m3
-    reliable = df['AMBIENT_TEMP_CONFIDENCE_LEVEL'].str[-1] == '1'  # last flag = "observation reliable"
+    reliable = df['AMBIENT_TEMP_CONFIDENCE_LEVEL'].str[-1] == '1'  # is observation "reliable"?
     night = hour.isin(NIGHT_HOURS)
 
-    night_min = amb[night].quantile(0.01)                          # 1st percentile ignores single-reading glitches
+    night_min = amb[night].quantile(0.01)                          # 1st percentile ignores single-reading anomalies
     day_max = amb.quantile(0.99)
     return {
         'SOL': sol,
         'LS': solar_longitude(df['TIMESTAMP'].mean()),
         'ROWS': len(df),
-        'HOURS_COVERED': hour.nunique(),                           # of 24 local hours with data
+        'HOURS_COVERED': hour.nunique(),
         'NIGHT_ROWS': int(night.sum()),
         'AIR_T_RELIABLE_SHARE': reliable.mean(),
         'P_MEAN': p.mean(), 'P_MIN': p.min(), 'P_MAX': p.max(),
@@ -92,7 +92,7 @@ def summarise_sol(sol, tab_path):
         'AIR_T_RANGE_K': day_max - night_min,
     }
 
-# Block folders from the DATA index page
+# Block out folders from the DATA index page
 index_html = requests.get(BASE_URL, timeout=60).text
 blocks = sorted(set((int(a), int(b), f'SOL_{a}_{b}') for a, b in re.findall(r'SOL_(\d{5})_(\d{5})/', index_html)))
 if not blocks:
@@ -118,7 +118,7 @@ for label, target_sol in TARGETS.items():
         tab_name = sorted(tabs)[-1]
         lbl_name = tab_name.replace('.TAB', '.LBL')
 
-        # Check the column layout version before trusting our hard-coded column list
+        # Double-check the column layout version
         lbl_text = requests.get(sol_url + lbl_name, timeout=60).text
         fmt = re.search(r'\^STRUCTURE\s*=\s*"([^"]+)"', lbl_text)
         if not fmt or fmt.group(1) != EXPECTED_FORMAT:

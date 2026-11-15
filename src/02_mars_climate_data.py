@@ -7,7 +7,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 MCD_DIR = BASE_DIR / 'data' / 'raw' / 'mcd'
 RAW_DIR = BASE_DIR / 'data' / 'raw'
 NIGHT_HOURS = {18, 19, 20, 21, 22, 23, 0, 1, 2, 3, 4, 5}
-CONV_THRESHOLD = 5.0      # m/s - an hour counts as "convective" above this
+CONV_THRESHOLD = 5.0      # m/s, an hour counts as "convective" above this
 
 # Load the REMS outputs 
 daily_df = pd.read_csv(RAW_DIR / 'gale_late_winter_daily.csv')

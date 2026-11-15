@@ -1,0 +1,11 @@
+TILE,SOURCE,VALID,OFFSET_M,NMAD_M,RMSE_M,OUTLIERS,CORRELATION,SLOPE_MEAN,SLOPE_P95,RELIEF_M,ROUGHNESS_M,VERDICT
+dem_best_terrain_alaska_range_5km_2m.tif,"ArcticDEM 2 m tile (reference, averaged to 20 m)",1.0,0.0,0.0,0.0,0.0,1.0,19.283,39.743,1350.606,99.267,reference
+dem_best_terrain_alaska_range_5km_2m.tif,"Copernicus GLO-30 (radar, 30 m)",1.0,-16.914,12.949,16.549,0.025,0.999,18.664,39.389,1304.805,97.21,Agrees with the tile
+dem_best_terrain_alaska_range_5km_2m.tif,"ALOS AW3D30 (optical stereo, 30 m)",1.0,-14.096,12.191,16.438,0.023,0.999,18.854,39.679,1309.766,97.752,Agrees with the tile
+dem_best_terrain_alaska_range_5km_2m.tif,USGS 3DEP 10 m (airborne radar in Alaska),1.0,-20.53,10.234,15.879,0.026,0.999,18.763,39.404,1306.833,97.242,Agrees with the tile
+dem_best_terrain_alaska_range_5km_2m.tif,"ASTER GDEM v3 (the earlier tile, 25 m)",1.0,-22.794,19.336,24.543,0.054,0.998,19.075,39.681,1327.049,98.206,Disagrees with the tile
+dem_best_terrain_alaska_range_25km_5m.tif,"ArcticDEM 2 m tile (reference, averaged to 50 m)",1.0,0.0,0.0,0.0,0.0,1.0,22.261,44.888,3180.354,116.092,reference
+dem_best_terrain_alaska_range_25km_5m.tif,"Copernicus GLO-30 (radar, 30 m)",1.0,-16.619,7.1,16.534,0.023,1.0,21.996,44.392,3175.135,114.681,Agrees with the tile
+dem_best_terrain_alaska_range_25km_5m.tif,"ALOS AW3D30 (optical stereo, 30 m)",1.0,-14.277,6.196,23.311,0.01,1.0,22.112,44.842,3166.501,115.487,Agrees with the tile
+dem_best_terrain_alaska_range_25km_5m.tif,USGS 3DEP 10 m (airborne radar in Alaska),1.0,-17.643,5.558,10.194,0.006,1.0,22.012,44.674,3170.607,114.746,Agrees with the tile
+dem_best_terrain_alaska_range_25km_5m.tif,"ASTER GDEM v3 (the earlier tile, 25 m)",0.04,,,,,,,,,,Not enough overlap to compare
